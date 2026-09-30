@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rede Drogão Popular - Taquaral | Medicamentos, Ofertas e Tele-entrega</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%2300529B'/><path d='M35 50 h30 M50 35 v30' stroke='white' stroke-width='12' stroke-linecap='round'/><path d='M60 65 L70 75 L85 55' stroke='%2325D366' stroke-width='8' fill='none' stroke-linecap='round'/></svg>">
+
+    <!-- Tipografia Google Fonts (Poppins e Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* ==========================================================================
+           1. VARIÁVEIS E RESET CSS
+           ========================================================================== */
+        :root {
+            --bg-principal: #F4F6F8;
+            --bg-cards: #FFFFFF;
+            --azul-marinho: #002855;
+            --azul-saude: #00529B;
+            --vermelho-oferta: #E30613;
+            --verde-whatsapp: #25D366;
+            --texto-escuro: #1A202C;
+            --texto-suave: #4A5568;
+            --borda-cor: #E2E8F0;
+            --font-titulo: 'Poppins', sans-serif;
+            --font-corpo: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-corpo);
+            background-color: var(--bg-principal);
+            color: var(--texto-escuro);
+            line-height: 1.6;
+        }
+
+        /* ==========================================================================
+           2. COMPONENTES REUTILIZÁVEIS
+           ========================================================================== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding {
+            padding: 80px 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--verde-whatsapp);
+            color: #FFFFFF;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1eb956;
+            transform: translateY(-2px);
+        }
+
+        .btn-oferta {
+            background-color: var(--vermelho-oferta);
+            color: #FFFFFF;
+        }
+
+        .btn-oferta:hover {
+            background-color: #c40410;
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: #FFFFFF;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .btn-outline:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: #FFFFFF;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-tag {
+            color: var(--vermelho-oferta);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-family: var(--font-titulo);
+            font-size: 32px;
+            color: var(--azul-marinho);
+        }
+
+        /* ==========================================================================
+           3. CABEÇALHO (STICKY)
+           ========================================================================== */
+        .header {
+            position: sticky;
+            top: 0;
+            background-color: var(--azul-saude);
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 75px;
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #FFFFFF;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            background: #FFFFFF;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--azul-saude);
+        }
+
+        .brand-text h1 {
+            font-family: var(--font-titulo);
+            font-size: 18px;
+            line-height: 1.1;
+        }
+
+        .brand-text span {
+            font-size: 12px;
+            color: #E2E8F0;
+            font-weight: 400;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #CBD5E0;
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION
+           ========================================================================== */
+        .hero {
+            background-color: var(--azul-marinho);
+            color: #FFFFFF;
+            padding: 60px 0 80px 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hero-title {
+            font-family: var(--font-titulo);
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .hero-subtitle {
+            font-size: 16px;
+            color: #CBD5E0;
+            margin-bottom: 30px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .hero-card {
+            background: var(--bg-cards);
+            border-radius: 12px;
+            padding: 24px;
+            color: var(--texto-escuro);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .hero-card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--borda-cor);
+        }
+
+        .metric-val {
+            font-weight: 700;
+            color: var(--azul-saude);
+            font-size: 18px;
+        }
+
+        .metric-lbl {
+            font-size: 11px;
+            color: var(--texto-suave);
+        }
+
+        /* ==========================================================================
+           5. SEÇÃO QUEM SOMOS
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .about-text p {
+            margin-bottom: 16px;
+            color: var(--texto-suave);
+        }
+
+        /* ==========================================================================
+           6. SEÇÃO DE SERVIÇOS (CARDS)
+           ========================================================================== */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            background: var(--bg-cards);
+            border: 1px solid var(--borda-cor);
+            border-radius: 12px;
+            padding: 30px 24px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+        }
+
+        .service-icon {
+            font-size: 32px;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .service-title {
+            font-family: var(--font-titulo);
+            font-size: 18px;
+            color: var(--azul-marinho);
+            margin-bottom: 10px;
+        }
+
+        .service-desc {
+            font-size: 14px;
+            color: var(--texto-suave);
+            margin-bottom: 16px;
+        }
+
+        .service-link {
+            color: var(--azul-saude);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        /* ==========================================================================
+           7. GALERIA COM GRID SEMÂNTICO
+           ========================================================================== */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background: var(--bg-cards);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--borda-cor);
+        }
+
+        .gallery-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-card figcaption {
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--texto-escuro);
+            background: #FFFFFF;
+        }
+
+        /* ==========================================================================
+           8. FORMULÁRIO DE AGENDAMENTO & CONTATO
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.3fr;
+            gap: 40px;
+        }
+
+        .info-box {
+            background: var(--bg-cards);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--borda-cor);
+        }
+
+        .info-item {
+            margin-bottom: 24px;
+        }
+
+        .info-item h4 {
+            font-family: var(--font-titulo);
+            color: var(--azul-marinho);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-item p {
+            font-size: 14px;
+            color: var(--texto-suave);
+        }
+
+        .form-box {
+            background: var(--bg-cards);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--borda-cor);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--texto-escuro);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--borda-cor);
+            border-radius: 6px;
+            font-family: var(--font-corpo);
+            font-size: 14px;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--azul-saude);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        /* ==========================================================================
+           9. RODAPÉ E COOKIES
+           ========================================================================== */
+        .footer {
+            background: var(--azul-marinho);
+            color: #FFFFFF;
+            padding: 50px 0 20px 0;
+            font-size: 14px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-family: var(--font-titulo);
+            margin-bottom: 16px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #CBD5E0;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: #FFFFFF;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #A0AEC0;
+            font-size: 13px;
+        }
+
+        /* Banner de Cookies Fixo */
+        .banner-cookies {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(26, 32, 44, 0.95);
+            color: #ffffff;
+            padding: 15px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 9999;
+            font-size: 14px;
+        }
+
+        .btn-cookies {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-cookies:hover {
+            background-color: #218838;
+        }
+
+        .oculto {
+            display: none !important;
+        }
+
+        /* RESPONSIVIDADE MOBILE */
+        @media (max-width: 768px) {
+            .hero-grid, .about-grid, .contact-grid, .form-row {
+                grid-template-columns: 1fr;
+            }
+            .nav-links {
+                display: none;
+            }
+            .hero-title {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CABEÇALHO COM MENU STICKY -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="#" class="brand-logo">
+                <div class="logo-icon">✚</div>
+                <div class="brand-text">
+                    <h1>Drogão Popular</h1>
+                    <span>Unidade Taquaral</span>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#agendamento">Atendimento</a></li>
+            </ul>
+            <a href="https://wa.me/5519998765432" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp">
+                🛵 Enviar Receita
+            </a>
+        </div>
+    </header>
+
+    <!-- BANNER PRINCIPAL (HERO SECTION) -->
+    <section id="inicio" class="hero">
+        <div class="container hero-grid">
+            <div>
+                <div class="hero-badges">
+                    <span class="badge">🛵 Entrega Expressa no Taquaral</span>
+                    <span class="badge">🩺 Farmacêutico Presente</span>
+                    <span class="badge">💊 Até 80% OFF em Genéricos</span>
+                </div>
+                <h2 class="hero-title">Economia em Medicamentos e Atenção à Sua Saúde no Bairro Taquaral</h2>
+                <p class="hero-subtitle">Medicamentos genéricos com descontos validados e tele-entrega rápida via WhatsApp. Atendimento humanizado e confiável para toda a família.</p>
+                <div class="hero-ctas">
+                    <a href="https://wa.me/5519998765432" target="_blank" rel="noopener noreferrer" class="btn btn-oferta">
+                        Pedir pelo WhatsApp 🛵
+                    </a>
+                    <a href="#servicos" class="btn btn-outline">
+                        Ver Ofertas em Genéricos
+                    </a>
+                </div>
+            </div>
+            <div>
+                <div class="hero-card">
+                    <img src="https://images.unsplash.com/photo-1586015555751-63c62140a3d4?auto=format&fit=crop&w=600&q=80" alt="Drogão Popular Taquaral" class="hero-card-img">
+                    <h3 style="font-size:16px; font-family:var(--font-titulo); color:var(--azul-marinho);">Unidade Monsenhor Jerônimo Baggio</h3>
+                    <p style="font-size:12px; color:var(--texto-suave);">Av. Monsenhor Jerônimo Baggio, 219 - Taquaral, Campinas</p>
+                    <div class="hero-metrics">
+                        <div>
+                            <div class="metric-val">+80%</div>
+                            <div class="metric-lbl">Desconto Genéricos</div>
+                        </div>
+                        <div>
+                          <div class="metric-val">30 min</div>
+                         <div class="metric-lbl">Entrega Bairro</div>
+                        </div>
+                        <div>
+                            <div class="metric-val">Nota 4.9</div>
+                            <div class="metric-lbl">Avaliação Local</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO QUEM SOMOS / NOSSA HISTÓRIA -->
+    <section id="sobre" class="section-padding" style="background:#FFFFFF;">
+        <div class="container about-grid">
+            <img src="https://images.unsplash.com/photo-1576602976047-174e57a47881?auto=format&fit=crop&w=600&q=80" alt="Equipe de atendimento da farmácia" class="about-img">
+            <div class="about-text">
+                <span class="section-tag">Nossa História e Compromisso</span>
+                <h2 class="section-title" style="text-align:left; margin-bottom:20px;">A farmácia parceira do seu bem-estar no coração do Taquaral</h2>
+                <p>Instalada estrategicamente na <strong>Av. Monsenhor Jerônimo Baggio, 219</strong>, a Drogão Popular Taquaral nasceu para aliar o acolhimento do atendimento de bairro ao poder de preço das grandes redes.</p>
+                <p>Cada receita é tratada com rigor ético por farmacêuticos graduados presentes durante todo o horário de funcionamento, garantindo o suporte necessário principalmente aos nossos clientes da melhor idade.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEÇÃO DE SERVIÇOS -->
+    <section id="servicos" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Cuidado Integral</span>
+                <h2 class="section-title">Nossa Estrutura e Serviços Farmacêuticos</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <span class="service-icon">🛵</span>
+                    <h3 class="service-title">Tele-Entrega Taquaral</h3>
+                    <p class="service-desc">Envio rápido de medicamentos e receitas com maquininha sem fio no seu endereço.</p>
+                    <a href="https://wa.me/5519998765432" target="_blank" rel="noopener noreferrer" class="service-link">Pedir pelo WhatsApp →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">💊</span>
+                    <h3 class="service-title">Economia em Genéricos</h3>
+                    <p class="service-desc">Descontos de até 80% na linha completa das melhores marcas de genéricos.</p>
+                    <a href="#agendamento" class="service-link">Cotar Receita →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🩺</span>
+                    <h3 class="service-title">Atenção Farmacêutica</h3>
+                    <p class="service-desc">Aplicação de injetáveis, teste de glicemia e aferição de pressão em sala dedicada.</p>
+                    <a href="#agendamento" class="service-link">Agendar Procedimento →</a>
+                </div>
+                <div class="service-card">
+                    <span class="service-icon">🧴</span>
+                    <h3 class="service-title">Higiene & Cosméticos</h3>
+                    <p class="service-desc">Linha completa de cuidados infantis, dermocosméticos e higiene pessoal.</p>
+                    <a href="#agendamento" class="service-link">Consultar Itens →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALERIA DE IMAGENS COM LEGENDAS (FIGURE E FIGCAPTION) -->
+    <section id="galeria" class="section-padding" style="background:#FFFFFF;">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Conheça Nossa Loja</span>
+                <h2 class="section-title">Vitrine Virtual e Espaço Farmacêutico</h2>
+            </div>
+            <div class="gallery-grid">
+                <figure class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1586015555751-63c62140a3d4?auto=format&fit=crop&w=500&q=80" alt="Fachada e Balcão de Atendimento">
+                    <figcaption>📍 Balcão de Atendimento Rápido e Recepção</figcaption>
+                </figure>
+                <figure class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=500&q=80" alt="Gôndola de Medicamentos">
+                    <figcaption>💊 Gôndolas Organizadas com Ofertas em Genéricos</figcaption>
+                </figure>
+                <figure class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=500&q=80" alt="Seção de Perfumaria e Cosméticos">
+                    <figcaption>🧴 Seção de Cuidados Pessoais e Infantil</figcaption>
+                </figure>
+                <figure class="gallery-card">
+                    <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=500&q=80" alt="Sala de Atendimento Farmacêutico">
+                    <figcaption>🩺 Sala Clínica de Aplicação e Medição de Pressão</figcaption>
+                </figure>
+            </div>
+        </div>
+    </section>
+
+    <!-- FORMULÁRIO DE CONTATO E AGENDAMENTO -->
+    <section id="agendamento" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Fale Conosco</span>
+                <h2 class="section-title">Envie sua Receita ou Agende um Serviço</h2>
+            </div>
+            <div class="contact-grid">
+                <div class="info-box">
+                    <div class="info-item">
+                        <h4>📍 Endereço Correto</h4>
+                        <p>Av. Monsenhor Jerônimo Baggio, 219<br>Bairro Taquaral — Campinas / SP</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>⏰ Horário de Funcionamento</h4>
+                        <p>Segunda a Sábado: 07h00 às 23h00<br>Domingos e Feriados: 08h00 às 22h00</p>
+                    </div>
+                    <div class="info-item">
+                        <h4>📞 WhatsApp de Tele-entrega</h4>
+                        <p>(19) 99876-5432</p>
+                    </div>
+                </div>
+
+                <div class="form-box">
+                    <form id="form-contato" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="nome">Nome Completo *</label>
+                            <input type="text" id="nome" name="nome" class="form-control" placeholder="Ex.: Maria de Lourdes" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">E-mail *</label>
+                                <input type="email" id="email" name="email" class="form-control" placeholder="seu@email.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="data_agendamento">Data para Atendimento *</label>
+                                <input type="date" id="data_agendamento" name="data_agendamento" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="servico">Selecione o Serviço *</label>
+                            <select id="servico" name="servico" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                <option value="cotacao">Cotação / Envio de Receita</option>
+                                <option value="pressao">Aferição de Pressão</option>
+                                <option value="glicemia">Teste de Glicemia</option>
+                                <option value="injetaveis">Aplicação de Injetáveis</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-oferta" style="width:100%;">Solicitar Atendimento</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RODAPÉ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Drogão Popular Taquaral</h4>
+                    <p style="color:#A0AEC0;">Sua farmácia de confiança no bairro com o melhor preço em genéricos e atendimento dedicado.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navegação Rápida</h4>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Quem Somos</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#agendamento">Agendamento</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Localização Externa</h4>
+                    <p style="margin-bottom:12px; color:#A0AEC0;">Veja como chegar à nossa loja pelo mapa oficial:</p>
+                    <a href="https://maps.google.com/?q=Av.+Monsenhor+Jeronimo+Baggio+219+Taquaral+Campinas" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="font-size:12px;">
+                        📍 Abrir no Google Maps
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Rede Drogão Popular - Unidade Taquaral. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BANNER DE COOKIES -->
+    <div id="banner-cookies" class="banner-cookies">
+        <p>Utilizamos cookies para personalizar sua experiência. Ao continuar navegando, você concorda com a nossa política.</p>
+        <button id="btn-aceitar-cookies" class="btn-cookies">Entendi e Aceito</button>
+    </div>
+
+    <!-- SCRIPT DE LÓGICA DE COOKIES -->
+    <script>
+        const bannerCookies = document.getElementById('banner-cookies');
+        const btnAceitar = document.getElementById('btn-aceitar-cookies');
+
+        const cookiesAceitos = localStorage.getItem('cookiesAceitos');
+
+        if (cookiesAceitos === 'sim') {
+            bannerCookies.classList.add('oculto');
+        }
+
+        btnAceitar.addEventListener('click', () => {
+            localStorage.setItem('cookiesAceitos', 'sim');
+            bannerCookies.classList.add('oculto');
+        });
+    </script>
+</body>
+</html>
